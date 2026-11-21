@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
+import { AdSlot } from "@/components/AdSlot";
 import PostCard from "@/components/PostCard";
 import Reveal from "@/components/Reveal";
 import {
@@ -112,9 +114,18 @@ export default async function CategoryPage({
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {listing.posts.map((post, index) => (
-            <Reveal key={post.slug} delay={(index % 4) * 90}>
-              <PostCard post={post} />
-            </Reveal>
+            <Fragment key={post.slug}>
+              <Reveal delay={(index % 4) * 90}>
+                <PostCard post={post} />
+              </Reveal>
+              {/* In-feed 300x250 after the first row */}
+              {(index === 3 ||
+                (index === listing.posts.length - 1 && listing.posts.length < 4)) && (
+                <div className="flex justify-center sm:col-span-2 lg:col-span-4">
+                  <AdSlot size="300x250" />
+                </div>
+              )}
+            </Fragment>
           ))}
         </div>
       )}

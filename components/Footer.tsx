@@ -7,6 +7,7 @@ import {
   getCategories,
   getTags,
 } from "@/data/posts";
+import { SmartlinkText } from "./AdSlot";
 import TagPill from "./TagPill";
 
 /** Site footer: About, Recent Posts, Categories, Tags and copyright. */
@@ -107,6 +108,8 @@ export default function Footer() {
           <p>© 2026 Redline. All rights reserved.</p>
           <p>
             Built with Next.js · <span className="text-neutral-300">redlinepk.com</span>
+            {" · "}
+            <SmartlinkText className="transition-colors hover:text-brand" />
           </p>
         </div>
       </div>

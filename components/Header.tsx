@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { SearchEntry } from "@/data/posts";
+import { AdSlot } from "./AdSlot";
 import LiveUpdatesModal, { type Headline } from "./LiveUpdatesModal";
 import SearchOverlay from "./SearchOverlay";
 import TagPill from "./TagPill";
@@ -80,7 +81,7 @@ export default function Header({
 
       {/* Masthead */}
       <div className="bg-brand">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-6 sm:px-6 lg:py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-6 sm:px-6 xl:flex-row xl:items-center xl:justify-between xl:gap-6 xl:py-8">
           <Link href="/" className="shrink-0 text-white" aria-label="Redline home">
             <span className="font-display text-4xl font-black uppercase leading-none tracking-tight sm:text-5xl">
               Redline<span className="text-ink">.</span>
@@ -89,18 +90,12 @@ export default function Header({
               News, stories &amp; sharp analysis
             </span>
           </Link>
-          <div
-            aria-hidden="true"
-            className="hidden h-[110px] w-full max-w-[730px] items-center justify-center border-2 border-dashed border-white/50 bg-brand-dark/40 text-center md:flex"
-          >
-            <div>
-              <p className="font-display text-lg font-bold uppercase tracking-widest text-white/90">
-                Banner Advertisement
-              </p>
-              <p className="text-xs uppercase tracking-widest text-white/60">
-                Recommended size 730 × 110
-              </p>
-            </div>
+          {/* Masthead banner: 728x90 on xl screens, 320x50 below */}
+          <div className="hidden shrink-0 xl:block">
+            <AdSlot size="728x90" tone="dark" />
+          </div>
+          <div className="xl:hidden">
+            <AdSlot size="320x50" tone="dark" />
           </div>
         </div>
       </div>

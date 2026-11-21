@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState, type ReactNode } from "react";
 import type { Post } from "@/data/posts";
 import FilterChip from "./FilterChip";
 import PostCard from "./PostCard";
@@ -13,9 +13,12 @@ const PAGE_SIZE = 8;
 export default function LatestStories({
   posts,
   categories,
+  inFeedAd,
 }: {
   posts: Post[];
   categories: string[];
+  /** Optional ad rendered full-width inside the grid after the first row. */
+  inFeedAd?: ReactNode;
 }) {
   const [active, setActive] = useState("All");
   const [visible, setVisible] = useState(PAGE_SIZE);
@@ -51,9 +54,17 @@ export default function LatestStories({
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {shown.map((post, index) => (
-            <Reveal key={post.slug} delay={(index % 4) * 90}>
-              <PostCard post={post} />
-            </Reveal>
+            <Fragment key={post.slug}>
+              <Reveal delay={(index % 4) * 90}>
+                <PostCard post={post} />
+              </Reveal>
+              {inFeedAd &&
+                (index === 3 || (index === shown.length - 1 && shown.length < 4)) && (
+                  <div className="flex justify-center sm:col-span-2 lg:col-span-4">
+                    {inFeedAd}
+                  </div>
+                )}
+            </Fragment>
           ))}
         </div>
       )}

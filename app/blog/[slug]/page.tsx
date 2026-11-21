@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdSlot, NativeBanner, SmartlinkText } from "@/components/AdSlot";
 import CategoryTags from "@/components/CategoryTags";
 import PostCard from "@/components/PostCard";
 import ReadingProgress from "@/components/ReadingProgress";
@@ -166,9 +167,19 @@ export default async function ArticlePage({
           <figcaption className="mt-2 text-xs text-neutral-500">{post.imageAlt}</figcaption>
         </figure>
 
+        {/* 468x60 under the hero image (hidden on very small screens) */}
+        <div className="mt-8 hidden justify-center sm:flex">
+          <AdSlot size="468x60" />
+        </div>
+
         <div className="article-body mt-8">
-          {post.content.map((paragraph, index) => (
+          {post.content.slice(0, 1).map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
+          ))}
+          {/* 300x250 after the first paragraph */}
+          <AdSlot size="300x250" className="my-8" />
+          {post.content.slice(1).map((paragraph, index) => (
+            <p key={index + 1}>{paragraph}</p>
           ))}
         </div>
 
@@ -219,7 +230,22 @@ export default async function ArticlePage({
             </Link>
           )}
         </nav>
+
+        {/* Smartlink */}
+        <p className="mt-8 text-center text-xs text-neutral-400">
+          <SmartlinkText className="underline-offset-2 transition-colors hover:text-brand hover:underline" />
+        </p>
       </article>
+
+      {/* 468x60 below the article (hidden on very small screens) */}
+      <div className="mt-12 hidden justify-center sm:flex">
+        <AdSlot size="468x60" />
+      </div>
+
+      {/* Native banner before related stories */}
+      <div className="mt-12">
+        <NativeBanner />
+      </div>
 
       {related.length > 0 && (
         <section aria-label="Related stories" className="mt-16">
