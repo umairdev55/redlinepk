@@ -60,6 +60,17 @@ data/
 - Premium animations: scroll-reveal, image zoom, card lift, animated headline underlines (all disabled under `prefers-reduced-motion`)
 - SEO: metadata templates, Open Graph, Twitter cards, BlogPosting JSON-LD, sitemap.xml, robots.txt, semantic HTML
 
+## Push notifications (OneSignal)
+
+Web push is wired up via [`components/PushNotifications.tsx`](components/PushNotifications.tsx) (OneSignal Web SDK v16) and the service worker at [`public/OneSignalSDKWorker.js`](public/OneSignalSDKWorker.js). It stays completely off until an App ID is configured — the site works fine without it.
+
+To enable it:
+
+1. Create a free account at [onesignal.com](https://onesignal.com) and add a **Web** app. Choose **Typical Site**, set the site URL to `https://redlinepk.com`, and keep the default service worker paths (`OneSignalSDKWorker.js`, scope `/`).
+2. Copy the **App ID** from the OneSignal dashboard under **Settings → Keys & IDs**.
+3. In Vercel, open the project → **Settings → Environment Variables** and add `NEXT_PUBLIC_ONESIGNAL_APP_ID` with that value (Production environment). For local development, copy `.env.example` to `.env.local` and fill it in there.
+4. Redeploy. Visitors will see a subscribe prompt (slidedown) plus the OneSignal bell widget, and new subscribers get a Redline welcome notification.
+
 ## Deploy on Vercel
 
 1. Push this repo to GitHub.

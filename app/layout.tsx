@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MobileStickyAd from "@/components/MobileStickyAd";
 import NewsletterBand from "@/components/NewsletterBand";
+import PushNotifications from "@/components/PushNotifications";
 import { getAllPosts, getSearchIndex, getTags } from "@/data/posts";
 
 const inter = Inter({
@@ -117,6 +118,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <MobileStickyAd />
         <AdScripts />
+        <PushNotifications />
       </body>
     </html>
   );
