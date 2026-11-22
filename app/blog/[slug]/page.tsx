@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import SaveButton from "@/components/SaveButton";
 import SectionHeader from "@/components/SectionHeader";
 import ShareButtons from "@/components/ShareButtons";
 import TagPill from "@/components/TagPill";
+import VideoEmbed from "@/components/VideoEmbed";
 import {
   categorySlug,
   formatDate,
@@ -76,6 +78,8 @@ export default async function ArticlePage({
   if (!post) notFound();
 
   const url = `${SITE_URL}/blog/${post.slug}`;
+  // Optional video goes after the 2nd paragraph (after the 1st on short posts).
+  const videoAfterIndex = post.content.length >= 3 ? 1 : 0;
   const related = getRelated(post, 3);
   const { prev, next } = getPrevNext(post);
 
@@ -169,7 +173,12 @@ export default async function ArticlePage({
 
         <div className="article-body mt-8">
           {post.content.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
+            <Fragment key={index}>
+              <p>{paragraph}</p>
+              {post.videoUrl && index === videoAfterIndex && (
+                <VideoEmbed url={post.videoUrl} title={post.title} />
+              )}
+            </Fragment>
           ))}
         </div>
 

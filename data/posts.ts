@@ -24,6 +24,12 @@ export interface Post {
   /** Exactly one cover photo per post. */
   image: string;
   imageAlt: string;
+  /**
+   * Optional video for the article body (YouTube link in any common form,
+   * or a direct embed URL). Leave unset for no video — the article then
+   * renders exactly as before.
+   */
+  videoUrl?: string;
   editorsPick?: boolean;
   featured?: boolean;
   trending?: boolean;
