@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
+import AdScripts from "@/components/AdScripts";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NewsletterBand from "@/components/NewsletterBand";
 import PushNotifications from "@/components/PushNotifications";
+import ResourceHints from "@/components/ResourceHints";
 import { getAllPosts, getSearchIndex, getTags } from "@/data/posts";
 
 const inter = Inter({
@@ -89,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${oswald.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-ink">
+        <ResourceHints />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -101,6 +104,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <NewsletterBand />
         <Footer />
+        <AdScripts />
         <PushNotifications />
       </body>
     </html>

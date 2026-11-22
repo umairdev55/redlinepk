@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
+import NativeBanner from "@/components/NativeBanner";
 import PostCard from "@/components/PostCard";
 import Reveal from "@/components/Reveal";
 import {
@@ -112,9 +114,18 @@ export default async function CategoryPage({
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {listing.posts.map((post, index) => (
-            <Reveal key={post.slug} delay={(index % 4) * 90}>
-              <PostCard post={post} />
-            </Reveal>
+            <Fragment key={post.slug}>
+              <Reveal delay={(index % 4) * 90}>
+                <PostCard post={post} />
+              </Reveal>
+              {(index === 3 ||
+                (listing.posts.length < 4 &&
+                  index === listing.posts.length - 1)) && (
+                <div className="sm:col-span-2 lg:col-span-4">
+                  <NativeBanner />
+                </div>
+              )}
+            </Fragment>
           ))}
         </div>
       )}

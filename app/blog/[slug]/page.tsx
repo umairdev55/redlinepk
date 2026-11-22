@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CategoryTags from "@/components/CategoryTags";
+import NativeBanner from "@/components/NativeBanner";
 import PostCard from "@/components/PostCard";
 import ReadingProgress from "@/components/ReadingProgress";
 import Reveal from "@/components/Reveal";
@@ -220,6 +221,11 @@ export default async function ArticlePage({
           )}
         </nav>
       </article>
+
+      {/* Native Banner */}
+      <div className="mt-16">
+        <NativeBanner />
+      </div>
 
       {related.length > 0 && (
         <section aria-label="Related stories" className="mt-16">

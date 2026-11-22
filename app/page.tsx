@@ -1,6 +1,7 @@
 import BreakingTicker from "@/components/BreakingTicker";
 import ImageCard from "@/components/ImageCard";
 import LatestStories from "@/components/LatestStories";
+import NativeBanner from "@/components/NativeBanner";
 import PostCard from "@/components/PostCard";
 import Reveal from "@/components/Reveal";
 import RowPost from "@/components/RowPost";
@@ -76,6 +77,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Native Banner */}
+      <div className="mt-14">
+        <NativeBanner />
+      </div>
 
       {/* Featured Posts */}
       <section aria-label="Featured posts" className="mt-14">
