@@ -15,7 +15,7 @@ export default function FilterChip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+      className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
         active
           ? "bg-brand text-white shadow-md shadow-brand/30"
           : "bg-smoke text-neutral-600 hover:bg-ink hover:text-white"

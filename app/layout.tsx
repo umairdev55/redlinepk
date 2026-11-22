@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
-import { AdSlot } from "@/components/AdSlot";
-import AdScripts from "@/components/AdScripts";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import MobileStickyAd from "@/components/MobileStickyAd";
 import NewsletterBand from "@/components/NewsletterBand";
 import PushNotifications from "@/components/PushNotifications";
 import { getAllPosts, getSearchIndex, getTags } from "@/data/posts";
@@ -101,23 +98,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           searchIndex={getSearchIndex()}
           headlines={headlines}
         />
-        {/* Side rail ads — shown only where the gutter fits a 160px rail
-            without overlapping the 1280px content container (≥1620px). */}
-        <div className="pointer-events-none fixed left-2 top-1/2 z-30 hidden -translate-y-1/2 min-[1620px]:block">
-          <div className="pointer-events-auto">
-            <AdSlot size="160x600" />
-          </div>
-        </div>
-        <div className="pointer-events-none fixed right-2 top-1/2 z-30 hidden -translate-y-1/2 min-[1620px]:block">
-          <div className="pointer-events-auto">
-            <AdSlot size="160x300" />
-          </div>
-        </div>
         <main className="flex-1">{children}</main>
         <NewsletterBand />
         <Footer />
-        <MobileStickyAd />
-        <AdScripts />
         <PushNotifications />
       </body>
     </html>

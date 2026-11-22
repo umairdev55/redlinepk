@@ -1,4 +1,3 @@
-import { AdSlot, NativeBanner } from "@/components/AdSlot";
 import BreakingTicker from "@/components/BreakingTicker";
 import ImageCard from "@/components/ImageCard";
 import LatestStories from "@/components/LatestStories";
@@ -78,11 +77,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Native banner */}
-      <div className="mt-10">
-        <NativeBanner />
-      </div>
-
       {/* Featured Posts */}
       <section aria-label="Featured posts" className="mt-14">
         <SectionHeader title="Featured Posts" />
@@ -124,17 +118,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 468x60 banner (hidden on very small screens) */}
-      <div className="mt-12 hidden justify-center sm:flex">
-        <AdSlot size="468x60" />
-      </div>
-
-      {/* Latest Stories (300x250 runs in-feed, after the first row) */}
+      {/* Latest Stories */}
       <div className="mt-14">
         <LatestStories
           posts={allPosts}
           categories={getCategories().map((category) => category.name)}
-          inFeedAd={<AdSlot size="300x250" />}
         />
       </div>
     </div>

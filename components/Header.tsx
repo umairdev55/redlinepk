@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import type { SearchEntry } from "@/data/posts";
-import { AdSlot } from "./AdSlot";
 import LiveUpdatesModal, { type Headline } from "./LiveUpdatesModal";
 import SearchOverlay from "./SearchOverlay";
 import TagPill from "./TagPill";
@@ -42,6 +42,21 @@ export default function Header({
   const [today, setToday] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [liveOpen, setLiveOpen] = useState(false);
+  const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+
+  /** Route-based active state for nav items ("All Demos" is an anchor, never active). */
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/"
+      : href.startsWith("/category/") && pathname === href;
+
+  // Keep the active nav item visible in the horizontally scrollable mobile row.
+  useEffect(() => {
+    navRef.current
+      ?.querySelector<HTMLElement>('[data-active="true"]')
+      ?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [pathname]);
 
   useEffect(() => {
     setToday(
@@ -81,7 +96,7 @@ export default function Header({
 
       {/* Masthead */}
       <div className="bg-brand">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-6 sm:px-6 xl:flex-row xl:items-center xl:justify-between xl:gap-6 xl:py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 py-4 sm:px-6 sm:py-6 xl:flex-row xl:items-center xl:justify-between xl:gap-6 xl:py-8">
           <Link href="/" className="shrink-0 text-white" aria-label="Redline home">
             <span className="font-display text-4xl font-black uppercase leading-none tracking-tight sm:text-5xl">
               Redline<span className="text-ink">.</span>
@@ -90,12 +105,22 @@ export default function Header({
               News, stories &amp; sharp analysis
             </span>
           </Link>
-          {/* Masthead banner: 728x90 on xl screens, 320x50 below */}
-          <div className="hidden shrink-0 xl:block">
-            <AdSlot size="728x90" tone="dark" />
+          {/* Masthead banner placeholder */}
+          <div
+            aria-hidden="true"
+            className="hidden h-[90px] w-[728px] shrink-0 items-center justify-center border border-white/30 bg-white/10 xl:flex"
+          >
+            <span className="font-display text-lg font-bold uppercase tracking-[0.3em] text-white/70">
+              Redline
+            </span>
           </div>
-          <div className="xl:hidden">
-            <AdSlot size="320x50" tone="dark" />
+          <div
+            aria-hidden="true"
+            className="flex h-[50px] w-[320px] max-w-full shrink-0 items-center justify-center border border-white/30 bg-white/10 xl:hidden"
+          >
+            <span className="font-display text-sm font-bold uppercase tracking-[0.3em] text-white/70">
+              Redline
+            </span>
           </div>
         </div>
       </div>
@@ -103,21 +128,37 @@ export default function Header({
       {/* Nav bar */}
       <div className="sticky top-0 z-50 bg-ink shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6">
-          <nav aria-label="Primary" className="nav-scroll flex items-center gap-1 overflow-x-auto">
-            {NAV_ITEMS.map((item, index) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`whitespace-nowrap px-3 py-3.5 font-display text-sm font-bold uppercase tracking-wide transition-colors sm:px-4 ${
-                  index === 0
-                    ? "bg-brand text-white"
-                    : "text-white/85 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="relative min-w-0 flex-1">
+            <nav
+              ref={navRef}
+              aria-label="Primary"
+              className="nav-scroll flex items-center gap-1 overflow-x-auto py-1.5 sm:py-0"
+            >
+              {NAV_ITEMS.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    data-active={active ? "true" : undefined}
+                    aria-current={active ? "page" : undefined}
+                    className={`whitespace-nowrap rounded-full px-3.5 py-2.5 font-display text-[13px] font-bold uppercase tracking-wide transition-colors sm:rounded-none sm:px-4 sm:py-3.5 sm:text-sm ${
+                      active
+                        ? "bg-brand text-white"
+                        : "text-white/85 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            {/* Right-edge fade hints the row scrolls (mobile only) */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-ink to-transparent lg:hidden"
+            />
+          </div>
           <div className="flex shrink-0 items-center gap-1">
             <button
               type="button"
@@ -158,7 +199,12 @@ export default function Header({
             Popular Tags
           </span>
           {tags.map((tag) => (
-            <TagPill key={tag.name} name={tag.name} href={tag.href} />
+            <TagPill
+              key={tag.name}
+              name={tag.name}
+              href={tag.href}
+              active={pathname === tag.href}
+            />
           ))}
         </div>
       </div>
