@@ -103,10 +103,24 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-neutral-500 sm:flex-row sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-xs text-neutral-500 sm:flex-row sm:px-6">
           <p>© 2026 Redline. All rights reserved.</p>
+          <nav aria-label="Site" className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <Link href="/about" className="transition-colors hover:text-brand">
+              About
+            </Link>
+            <Link href="/contact" className="transition-colors hover:text-brand">
+              Contact
+            </Link>
+            <Link href="/privacy" className="transition-colors hover:text-brand">
+              Privacy Policy
+            </Link>
+            <a href="/rss.xml" className="transition-colors hover:text-brand">
+              RSS
+            </a>
+          </nav>
           <p>
-            Built with Next.js · <span className="text-neutral-300">redlinepk.com</span>
+            Built with Next.js · <span className="text-neutral-300">redlinepk.vercel.app</span>
           </p>
         </div>
       </div>

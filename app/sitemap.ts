@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts, getCategories, getTags } from "@/data/posts";
-
-const SITE_URL = "https://redlinepk.com";
+import { SITE_URL } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
@@ -28,6 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
+  const staticEntries: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/about`, lastModified: latestDate, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/contact`, lastModified: latestDate, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/privacy`, lastModified: latestDate, changeFrequency: "monthly", priority: 0.3 },
+  ];
+
   return [
     {
       url: SITE_URL,
@@ -35,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 1,
     },
+    ...staticEntries,
     ...postEntries,
     ...categoryEntries,
     ...tagEntries,

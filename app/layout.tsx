@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import AdScripts from "@/components/AdScripts";
+import Analytics from "@/components/Analytics";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NewsletterBand from "@/components/NewsletterBand";
 import PushNotifications from "@/components/PushNotifications";
 import ResourceHints from "@/components/ResourceHints";
 import { getAllPosts, getSearchIndex, getTags } from "@/data/posts";
+import { SITE_URL } from "@/data/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,7 +24,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://redlinepk.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Redline — News, Stories & Sharp Analysis",
     template: "%s | Redline",
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     title: "Redline — News, Stories & Sharp Analysis",
     description:
       "Business, sport, technology, science and the people behind the headlines — reported clearly, published daily.",
-    url: "https://redlinepk.com",
+    url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
@@ -63,20 +65,32 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": "/rss.xml",
+    },
   },
+  // Google Search Console verification tag — rendered only when
+  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION is set (see .env.example).
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Redline",
-  url: "https://redlinepk.com",
+  url: SITE_URL,
   description:
     "Independent news and stories magazine covering business, sport, technology, science and the people behind the headlines.",
   publisher: {
     "@type": "Organization",
     name: "Redline",
-    url: "https://redlinepk.com",
+    url: SITE_URL,
   },
 };
 
@@ -105,6 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <NewsletterBand />
         <Footer />
         <AdScripts />
+        <Analytics />
         <PushNotifications />
       </body>
     </html>
