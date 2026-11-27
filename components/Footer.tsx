@@ -23,9 +23,9 @@ export default function Footer() {
             Redline<span className="text-brand">.</span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-neutral-400">
-            Redline is an independent news and stories magazine covering business,
-            sport, technology, science and the people behind the headlines —
-            reported clearly, published daily.
+            Redline is a tech magazine covering AI tools, software,
+            cybersecurity, web hosting and business technology —
+            practical guides and clear analysis.
           </p>
           <p className="mt-4 text-sm text-neutral-400">
             Subscribe:{" "}

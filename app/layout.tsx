@@ -26,20 +26,22 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Redline — News, Stories & Sharp Analysis",
+    default: "Redline — Tech, AI & Business",
     template: "%s | Redline",
   },
   description:
-    "Redline is an independent news and stories magazine covering business, sport, technology, science and the people behind the headlines — reported clearly, published daily.",
+    "Redline is a tech magazine covering AI tools, software, cybersecurity, web hosting, VPNs and business technology — practical guides and clear analysis for readers in the US and worldwide.",
   keywords: [
     "Redline",
-    "news",
-    "business news",
-    "sports news",
     "technology",
-    "science",
-    "stories",
-    "digital products",
+    "AI tools",
+    "SaaS",
+    "cybersecurity",
+    "VPN",
+    "web hosting",
+    "business technology",
+    "best AI tools",
+    "tech news",
   ],
   authors: [{ name: "Redline" }],
   creator: "Redline",
@@ -47,17 +49,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Redline",
-    title: "Redline — News, Stories & Sharp Analysis",
+    title: "Redline — Tech, AI & Business",
     description:
-      "Business, sport, technology, science and the people behind the headlines — reported clearly, published daily.",
+      "AI tools, software, cybersecurity, web hosting and business technology — practical guides and clear analysis.",
     url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Redline — News, Stories & Sharp Analysis",
+    title: "Redline — Tech, AI & Business",
     description:
-      "Business, sport, technology, science and the people behind the headlines — reported clearly, published daily.",
+      "AI tools, software, cybersecurity, web hosting and business technology — practical guides and clear analysis.",
   },
   robots: {
     index: true,
@@ -86,7 +88,7 @@ const websiteJsonLd = {
   name: "Redline",
   url: SITE_URL,
   description:
-    "Independent news and stories magazine covering business, sport, technology, science and the people behind the headlines.",
+    "Tech magazine covering AI tools, software, cybersecurity, web hosting, VPNs and business technology.",
   publisher: {
     "@type": "Organization",
     name: "Redline",

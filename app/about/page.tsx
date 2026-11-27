@@ -5,7 +5,7 @@ import { getCategories } from "@/data/posts";
 export const metadata: Metadata = {
   title: "About Redline",
   description:
-    "Redline is an independent news and stories magazine covering business, sport, technology, science and the people behind the headlines — reported clearly, published daily.",
+    "Redline is a tech magazine covering AI tools, software, cybersecurity, web hosting, VPNs and business technology — practical guides and clear analysis.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,16 +18,16 @@ export default function AboutPage() {
         About
       </p>
       <h1 className="mt-3 font-display text-4xl font-black uppercase leading-tight text-ink">
-        News, stories &amp; sharp analysis
+        Tech, AI &amp; business
       </h1>
       <span aria-hidden="true" className="mt-4 block h-1 w-16 bg-brand" />
 
       <div className="mt-8 space-y-5 text-base leading-relaxed text-neutral-700">
         <p>
-          Redline is an independent news and stories magazine. We cover
-          business, sport, technology, science and the people behind the
-          headlines — reported clearly, published daily, and written for
-          readers who want the full picture without the noise.
+          Redline is a tech magazine. We cover AI tools, software,
+          cybersecurity, web hosting, VPNs and business technology —
+          practical guides and clear analysis, written for readers who
+          want to choose the right tool without the noise.
         </p>
         <p>
           Every story on Redline is published in one place and organised by

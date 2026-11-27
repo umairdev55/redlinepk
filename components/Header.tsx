@@ -10,10 +10,10 @@ import TagPill from "./TagPill";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
+  { label: "Tech", href: "/category/tech" },
   { label: "Business", href: "/category/business" },
-  { label: "Sports", href: "/category/sports" },
+  { label: "Science", href: "/category/science" },
   { label: "Newsbeat", href: "/category/newsbeat" },
-  { label: "Stories", href: "/category/stories" },
   { label: "All Demos", href: "/#latest" },
 ];
 
@@ -102,7 +102,7 @@ export default function Header({
               Redline<span className="text-ink">.</span>
             </span>
             <span className="mt-1 block text-xs font-medium uppercase tracking-[0.25em] text-white/80">
-              News, stories &amp; sharp analysis
+              Tech, AI &amp; business — explained clearly
             </span>
           </Link>
           {/* Masthead banner placeholder */}
