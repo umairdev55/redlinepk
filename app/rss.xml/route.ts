@@ -41,7 +41,7 @@ export function GET() {
     "  <channel>",
     `    <title>${escapeXml(SITE_NAME)} — News, Stories &amp; Sharp Analysis</title>`,
     `    <link>${escapeXml(SITE_URL)}</link>`,
-    "    <description>Business, sport, technology, science and the people behind the headlines — reported clearly, published daily.</description>",
+    "    <description>Tech, AI and business — explained clearly, published daily.</description>",
     "    <language>en-us</language>",
     `    <lastBuildDate>${lastBuildDate}</lastBuildDate>`,
     items,

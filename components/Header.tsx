@@ -12,8 +12,6 @@ const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Tech", href: "/category/tech" },
   { label: "Business", href: "/category/business" },
-  { label: "Science", href: "/category/science" },
-  { label: "Newsbeat", href: "/category/newsbeat" },
   { label: "All Demos", href: "/#latest" },
 ];
 
